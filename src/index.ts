@@ -50,13 +50,6 @@ export const extendApp = (
     }
   }
   (app as any).mergedHandle = mergedHandle; // for unit testing
-
-  const listen = app.listen.bind(app);
-  (app as any).listen = (port: number, callback?: () => void) => {
-    console.log(`Bot service listening on port ${port}
-Please set your RingCentral app redirect URI to ${process.env.RINGCENTRAL_CHATBOT_SERVER}/bot/oauth`);
-    return listen(port, callback);
-  };
   return app;
 };
 

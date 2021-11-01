@@ -16,6 +16,7 @@ export type BotType = {
   updateToken: Function;
   sendMessage: Function;
   sendAdaptiveCard: Function;
+  updateAdaptiveCard: Function;
 };
 
 export type Message = {

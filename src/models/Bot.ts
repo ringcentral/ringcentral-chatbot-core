@@ -182,7 +182,7 @@ Bot.prototype.sendAdaptiveCard = async function (groupId: string, body: any) {
 };
 
 Bot.prototype.updateAdaptiveCard = async function (postId: string, body: any) {
-  const r = await this.rc.post(
+  const r = await this.rc.put(
     `/restapi/v1.0/glip/adaptive-cards/${postId}`,
     body
   );
