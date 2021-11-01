@@ -1,7 +1,5 @@
 # RingCentral chatbot framework Core module
 
-## Status: work in progress
-
 This is a fork of [https://github.com/ringcentral/ringcentral-chatbot-js](https://github.com/ringcentral/ringcentral-chatbot-js), the goal is put bot logic into one standalone module so add-in framework or other project can use it.
 
 ## How to use
