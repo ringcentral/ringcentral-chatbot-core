@@ -2,9 +2,12 @@ import express from 'express';
 import { BotConfig } from '../types'
 import {botDeleted, postAdded, groupLeft} from '../handlers';
 import {BotType} from '../types';
+import bodyParser from 'body-parser'
 
 const createApp = (handle: Function, conf: BotConfig) => {
   const app = express();
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
   const {Bot} = conf.models || {}
   app.all('/oauth', async (req, res) => {
     const bot = (await (Bot as any).init({

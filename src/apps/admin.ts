@@ -5,6 +5,8 @@ import {BotType} from '../types';
 
 const createApp = (handle: Function, conf: BotConfig) => {
   const app = express();
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
   const {Bot} = conf.models || {}
   const {setupDatabase = () => null} = conf
   app.use(
