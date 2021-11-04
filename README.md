@@ -9,7 +9,7 @@ import { extendApp } from 'ringcentral-chatbot-core'
 import express from 'express'
 
 function eventHandler ({
-    type，// could be 'BotRemoved', 'Message4Bot', 'BotGroupLeft', 'BotJoinGroup', 'Maintain', 'SetupDatabase'
+    type, // could be 'BotRemoved', 'Message4Bot', 'BotGroupLeft', 'BotJoinGroup', 'Maintain', 'SetupDatabase'
     bot, // the bot instance, check src/models/Bot.ts for instance methods
     text, // the text message user posted in chatgroup
     group, // the group object, can get chat group id from group.id
@@ -17,7 +17,7 @@ function eventHandler ({
     message // message object, check ringcentral api document for detail
 }) {
     console.log(
-        type，
+        type,
         bot,
         text,
         group,
