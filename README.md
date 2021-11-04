@@ -90,9 +90,13 @@ app.listen(3000, () => {
 
 Check [src/models/Bot.ts](src/models/Bot.ts) for details.
 
-## More details:
+## More details
 
 Check [https://github.com/ringcentral/ringcentral-chatbot-js](https://github.com/ringcentral/ringcentral-chatbot-js)
+
+## demos
+
+- [https://github.com/ringcentral/demo-bot-poly](https://github.com/ringcentral/demo-bot-poly)
 
 ## License
 
