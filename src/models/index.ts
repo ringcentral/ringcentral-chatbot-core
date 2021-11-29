@@ -1,5 +1,4 @@
 import Bot from './Bot';
-import { Models } from '../types'
 
-const defaultModels: Models = {Bot}
+const defaultModels: any = {Bot}
 export default defaultModels;
