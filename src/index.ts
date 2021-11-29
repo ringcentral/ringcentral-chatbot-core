@@ -6,7 +6,7 @@ import defaultModels from './models'
 
 export const extendApp = (
   app: any,
-  skills: {handle: Function; app?: any}[] = [],
+  skills: { handle: Function; app?: any }[] = [],
   handle?: Function,
   config: BotConfig = {
     adminRoute: '/admin',
@@ -19,10 +19,9 @@ export const extendApp = (
     models: Object.assign({}, defaultModels, config.models || {})
   }
   conf.setupDatabase = async (force = false) => {
-    const {
-      Bot
-    } = conf.models
-    await Bot.sync({force});
+    for (const modelName in conf.models) {
+      await conf.models[modelName].sync({ force });
+    }
   };
   const mergedHandle = async (event: any) => {
     let handled = false;
