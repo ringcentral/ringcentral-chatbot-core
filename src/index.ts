@@ -1,8 +1,9 @@
 
 import botApp from './apps/bot';
 import adminApp from './apps/admin';
-import { BotConfig } from './types'
-import defaultModels from './models'
+import { BotConfig } from './types';
+import defaultModels from './models';
+import express from 'express';
 
 export const extendApp = (
   app: any,
@@ -35,6 +36,10 @@ export const extendApp = (
       }
     }
   };
+  
+  app.use(express.json());
+  app.use(express.urlencoded({extended: true}));
+  
   app.use(
     config.adminRoute,
     adminApp(mergedHandle, conf)
