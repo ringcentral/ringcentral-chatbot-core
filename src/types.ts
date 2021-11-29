@@ -43,13 +43,9 @@ export type AttachmentType = {
   name: string;
 };
 
-export interface Models {
-  Bot?: any
-}
-
 export interface BotConfig {
   adminRoute: string,
   botRoute: string,
-  models?: Models,
+  models?: any,
   setupDatabase?: Function
 }
