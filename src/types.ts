@@ -27,11 +27,11 @@ export type Message = {
     creatorId: string;
     groupId: string;
     mentions:
-      | null
-      | {
-          id: string;
-          type: string;
-        }[];
+    | null
+    | {
+      id: string;
+      type: string;
+    }[];
     attachments?: AttachmentType[];
   };
   ownerId: string;
@@ -43,9 +43,15 @@ export type AttachmentType = {
   name: string;
 };
 
+export interface EndPoint {
+  route: string;
+  handler?: Function;
+}
+
 export interface BotConfig {
-  adminRoute: string,
-  botRoute: string,
+  admin: EndPoint,
+  bot: EndPoint,
+  card: EndPoint,
   models?: any,
   setupDatabase?: Function
 }
