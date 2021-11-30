@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-chatbot-core",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "license": "MIT",
   "scripts": {
     "test": "RINGCENTRAL_CHATBOT_DATABASE_CONNECTION_URI=sqlite:// jest -c test/jest.config.ts",
