@@ -65,10 +65,6 @@ function botCommandHandler ({
   }
 }
 
-function cardHandler(req){
-  // handle adaptive card interactive messages
-}
-
 const config = {
   admin : {
     route: '/admin',
@@ -80,14 +76,14 @@ const config = {
   },
   card: {
     route: '/interactive-messages',
-    handler: cardHandler
+    handler: null
   },    
   models: { // optional
     Bot: 'your bot data model defination' // check src/models/Bot.ts as a example, optional
   }
 }
 
-const app = express();
+let app = express();
 const skills = []
 app = extendApp(app, skills, config)
 app.listen(3000, () => {

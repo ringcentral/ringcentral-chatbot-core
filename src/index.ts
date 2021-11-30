@@ -1,8 +1,9 @@
+
 import botApp from './apps/bot';
 import adminApp from './apps/admin';
-import cardApp from './apps/card';
 import { BotConfig } from './types';
 import defaultModels from './models';
+import express from 'express';
 export const extendApp = (
   app: any,
   skills: { handle: Function; app?: any }[] = [],
@@ -31,6 +32,9 @@ export const extendApp = (
     }
   };
 
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
   app.use(
     config.admin.route,
     adminApp(mergedHandle, conf)
@@ -39,12 +43,6 @@ export const extendApp = (
     config.bot.route,
     botApp(mergedHandle, conf)
   );
-  if (config.card.handler) {
-    app.use(
-      config.card.route,
-      cardApp(config.card.route, config.card.handler)
-    );
-  }
   for (const skill of skills) {
     if (skill.app) {
       app.use('/', skill.app);
