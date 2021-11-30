@@ -8,7 +8,7 @@ This is a fork of [https://github.com/ringcentral/ringcentral-chatbot-js](https:
 import { extendApp } from 'ringcentral-chatbot-core'
 import express from 'express'
 
-function botCommandHandler ({
+function eventHandler ({
     type, // could be 'BotRemoved', 'Message4Bot', 'BotGroupLeft', 'BotJoinGroup', 'Maintain', 'SetupDatabase'
     bot, // the bot instance, check src/models/Bot.ts for instance methods
     text, // the text message user posted in chatgroup
@@ -65,27 +65,17 @@ function botCommandHandler ({
   }
 }
 
-const config = {
-  admin : {
-    route: '/admin',
-    handler: null
-  },
-  bot:{
-    route: '/bot',
-    handler: botCommandHandler
-  },
-  card: {
-    route: '/interactive-messages',
-    handler: null
-  },    
-  models: { // optional
-    Bot: 'your bot data model defination' // check src/models/Bot.ts as a example, optional
-  }
+const botConfig = {
+    adminRoute: '/admin', // optional
+    botRoute: '/bot', // optional
+    models: { // optional
+        Bot: 'your bot data model defination' // check src/models/Bot.ts as a example, optional
+    }
 }
 
-let app = express();
+let app = express()
 const skills = []
-app = extendApp(app, skills, config)
+app = extendApp(app, skills, eventHandler, botConfig)
 app.listen(3000, () => {
     console.log('server running')
 })

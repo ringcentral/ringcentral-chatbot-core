@@ -4,16 +4,21 @@ import adminApp from './apps/admin';
 import { BotConfig } from './types';
 import defaultModels from './models';
 import express from 'express';
+
 export const extendApp = (
   app: any,
   skills: { handle: Function; app?: any }[] = [],
-  config: BotConfig
+  handle?: Function,
+  config: BotConfig = {
+    adminRoute: '/admin',
+    botRoute: '/bot',
+    models: {}
+  }
 ) => {
   const conf = {
     ...config,
     models: Object.assign({}, defaultModels, config.models || {})
   }
-
   conf.setupDatabase = async (force = false) => {
     for (const modelName in conf.models) {
       await conf.models[modelName].sync({ force });
@@ -21,8 +26,8 @@ export const extendApp = (
   };
   const mergedHandle = async (event: any) => {
     let handled = false;
-    if (config.bot.handler) {
-      handled = await config.bot.handler(event, handled);
+    if (handle) {
+      handled = await handle(event, handled);
     }
     for (const skill of skills) {
       if (skill.handle) {
@@ -31,16 +36,16 @@ export const extendApp = (
       }
     }
   };
-
+  
   app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-
+  app.use(express.urlencoded({extended: true}));
+  
   app.use(
-    config.admin.route,
+    config.adminRoute,
     adminApp(mergedHandle, conf)
   );
   app.use(
-    config.bot.route,
+    config.botRoute,
     botApp(mergedHandle, conf)
   );
   for (const skill of skills) {
@@ -49,10 +54,6 @@ export const extendApp = (
     }
   }
   (app as any).mergedHandle = mergedHandle; // for unit testing
-  console.log('server running...');
-  console.log(`- bot oauth uri:\n${process.env.RINGCENTRAL_CHATBOT_SERVER}${config.bot.route}/oauth`);
-  console.log(`- interactive message uri:\n${process.env.RINGCENTRAL_CHATBOT_SERVER}${config.card.route}`);
-  console.log(`- admin uri:\n${process.env.RINGCENTRAL_CHATBOT_SERVER}${config.admin.route}`);
   return app;
 };
 
