@@ -21,7 +21,9 @@ const createApp = (handle: Function, conf: BotConfig) => {
 
   app.post('/webhook', async (req, res) => {
     const message = req.body;
-    console.log('WebHook payload:', JSON.stringify(message));
+    if (process.env.LOG_LEVEL === 'DEBUG') {
+      console.log('WebHook payload:', JSON.stringify(message, null, 2));
+    }
     const body = message.body;
     if (body) {
       switch (body.eventType) {
