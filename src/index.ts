@@ -40,10 +40,12 @@ export const extendApp = (
   app.use(express.json());
   app.use(express.urlencoded({extended: true}));
   
-  app.use(
-    config.adminRoute,
-    adminApp(mergedHandle, conf)
-  );
+  if (process.env.RINGCENTRAL_CHATBOT_ADMIN_USERNAME && process.env.RINGCENTRAL_CHATBOT_ADMIN_PASSWORD) {
+    app.use(
+      config.adminRoute,
+      adminApp(mergedHandle, conf)
+    );
+  }
   app.use(
     config.botRoute,
     botApp(mergedHandle, conf)
