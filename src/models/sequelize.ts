@@ -28,9 +28,9 @@ else {
   }
 }
 
-const sequelize = new Sequelize(
+const sequelize = new (Sequelize as any)(
   process.env.RINGCENTRAL_CHATBOT_DATABASE_CONNECTION_URI,
   config
 )
 
-export default sequelize
+export default sequelize as any
