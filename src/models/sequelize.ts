@@ -17,6 +17,7 @@ if (process.env.USE_HEROKU_POSTGRES) {
 else {
   config = {
     define: {
+      saveUnknown: process.env.DYNAMO_SAVE_UN_KNOWN || false,
       timestamps: true
     },
     logging: false,
