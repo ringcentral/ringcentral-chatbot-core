@@ -15,9 +15,11 @@ if (process.env.USE_HEROKU_POSTGRES) {
   }
 }
 else {
+  let saveUnknown: any = process.env.DYNAMO_SAVE_UN_KNOWN
+  saveUnknown = saveUnknown === false || saveUnknown === 'false' ? false : true
   config = {
     define: {
-      saveUnknown: process.env.DYNAMO_SAVE_UN_KNOWN || false,
+      saveUnknown,
       timestamps: true
     },
     logging: false,

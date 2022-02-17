@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-chatbot-core",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "license": "MIT",
   "scripts": {
     "test": "RINGCENTRAL_CHATBOT_DATABASE_CONNECTION_URI=sqlite:// jest -c test/jest.config.ts",
@@ -13,7 +13,7 @@
     "@types/supertest": "^2.0.11",
     "@types/validator": "^13.6.3",
     "axios": "^0.24.0",
-    "dynamo-sequelize": "^1.0.7",
+    "dynamo-sequelize": "^1.0.8",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "form-data": "^4.0.0",
