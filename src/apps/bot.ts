@@ -53,7 +53,7 @@ const createApp = (handle: Function, conf: BotConfig) => {
           await handle({
             type: 'BotJoinGroup',
             bot: joinGroupBot,
-            group: {id: groupId, type},
+            group: {id: groupId, type: groupType },
           });
           break;
         }
