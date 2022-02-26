@@ -1825,10 +1825,10 @@ duplexer3@^0.1.4:
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
-dynamo-sequelize@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/dynamo-sequelize/-/dynamo-sequelize-2.0.1.tgz#4494c64643e7de9f7d1f87f3355e3ecf05f0680b"
-  integrity sha512-02pfoDJdloPtC2tU3KOE4ADNXDufBPXsEbrq2HlHiV0WAJ72Iy/oFob1HpRdHpcegedxM4Qvx/AuEp337VYoZQ==
+dynamo-sequelize@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/dynamo-sequelize/-/dynamo-sequelize-2.1.0.tgz#78afd07d8c7cc53a19482ef105577213d7340914"
+  integrity sha512-hXqFsRq4qcqEgZmYiiv0roYFR/AiaebZwGOIv0/Jtx9lkWptcRnpSSkOy+6zpB0eltmIYZXi6CAwVPhw9FneGQ==
   dependencies:
     dynamoose "^2.8.5"
     lodash.get "^4.4.2"
