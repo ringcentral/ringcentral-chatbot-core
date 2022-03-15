@@ -44,5 +44,5 @@ export const postAdded = async (Bot: any, message: Message) => {
     await bot.updateToken(text.substring(15).trim());
     return;
   }
-  return {text, group, bot, userId, message: message.body};
+  return {text, group, bot, userId, isPrivateChat, message: message.body};
 };

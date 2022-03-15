@@ -14,6 +14,7 @@ function eventHandler ({
     text, // the text message user posted in chatgroup
     group, // the group object, can get chat group id from group.id
     userId, // message creator's id
+    isPrivateChat, // if it is a private chat
     message // message object, check ringcentral api document for detail
 }) {
     console.log(
