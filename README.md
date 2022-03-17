@@ -91,6 +91,25 @@ app.listen(3000, () => {
 
 Check [src/models/Bot.ts](src/models/Bot.ts) for details.
 
+## Params controlled by ENV
+
+```js
+ // default is true, can be set to false
+process.env.DYNAMO_SAVE_UN_KNOWN=true
+
+// default is false, can be set to true
+process.env.DYNAMO_SAVE_JSON_AS_OBJECT=false
+
+// default is false, can be set to true
+process.env.USE_HEROKU_POSTGRES = false
+
+// set db url
+RINGCENTRAL_CHATBOT_DATABASE_CONNECTION_URI = 'sqlite:///file/db.sql'
+
+// when set to 'dynamo', process.env.RINGCENTRAL_CHATBOT_DATABASE_CONNECTION_URI will be ignored
+process.env.DIALECT = 'dynamo'
+```
+
 ## More details
 
 Check [https://github.com/ringcentral/ringcentral-chatbot-js](https://github.com/ringcentral/ringcentral-chatbot-js)

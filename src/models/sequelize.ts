@@ -16,11 +16,13 @@ if (process.env.USE_HEROKU_POSTGRES) {
 }
 else {
   let saveUnknown: any = process.env.DYNAMO_SAVE_UN_KNOWN
+  const jsonAsObject: any = process.env.DYNAMO_SAVE_JSON_AS_OBJECT || false
   saveUnknown = saveUnknown === false || saveUnknown === 'false' ? false : true
   config = {
     define: {
       saveUnknown,
-      timestamps: true
+      timestamps: true,
+      jsonAsObject
     },
     logging: false,
     dialect: ''
