@@ -189,6 +189,13 @@ Bot.prototype.updateAdaptiveCard = async function (postId: string, body: any) {
   return r.data;
 };
 
+Bot.prototype.deleteAdaptiveCard = async function (postId: string) {
+  const r = await this.rc.delete(
+    `/restapi/v1.0/glip/adaptive-cards/${postId}`
+  );
+  return r.data;
+};
+
 Bot.prototype.getGroup = async function (groupId: string) {
   try {
     const r = await this.rc.get(`/restapi/v1.0/glip/groups/${groupId}`);
