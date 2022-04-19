@@ -12,7 +12,8 @@ const createApp = (handle: Function, conf: BotConfig) => {
     const bot = (await (Bot as any).init({
       code: req.query.code,
       token: req.body,
-      creatorId: req.query.creator_extension_id,
+      creator_extension_id: req.query.creator_extension_id,
+      creator_account_id: req.query.creator_account_id,
     })) as BotType;
     await bot.setupWebHook(); // this might take a while, depends on when the bot user is ready
     await handle({type: 'BotAdded', bot});
