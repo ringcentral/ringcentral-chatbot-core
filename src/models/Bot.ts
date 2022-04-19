@@ -24,6 +24,7 @@ const Bot = sequelize.define('bot', {
 type InitOptions = {
   code: string;
   token: TokenInfo;
+  creatorId?: string;
 };
 
 (Bot as any).init = async (initOptions: InitOptions) => {
@@ -51,6 +52,7 @@ type InitOptions = {
       endpoint_id: 'p7GZlEVHRwKDwbx6UkH0YQ'
     }
     */
+    token.creatorId = initOptions.creatorId;
     return Bot.create({
       id: token.owner_id,
       token,
