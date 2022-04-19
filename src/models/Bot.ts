@@ -21,9 +21,14 @@ const Bot = sequelize.define('bot', {
   },
 });
 
+type BotTokenInfo = TokenInfo & {
+  creator_extension_id?: string;
+  creator_account_id?: string;
+};
+
 type InitOptions = {
   code: string;
-  token: TokenInfo;
+  token: BotTokenInfo;
   creator_extension_id?: string;
   creator_account_id?: string;
 };
@@ -42,7 +47,7 @@ type InitOptions = {
       code,
       redirect_uri: process.env.RINGCENTRAL_CHATBOT_SERVER + '/bot/oauth',
     });
-    const token = rc.token!;
+    const token: BotTokenInfo = rc.token!;
     /*
     {
       access_token: 'xxxxxx',
