@@ -14,6 +14,9 @@ export const postAdded = async (Bot: any, message: Message) => {
   }
   const groupId = message.body.groupId;
   const bot = (await Bot.findByPk(botId)) as unknown as BotType;
+  if (!bot) {
+    return;
+  }
   const group = await bot.getGroup(groupId);
   const isPrivateChat = group.members.length <= 2;
   if (
