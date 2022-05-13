@@ -24,7 +24,15 @@ export const postAdded = async (Bot: any, message: Message) => {
     (message.body.mentions === null ||
       !message.body.mentions.some(m => m.type === 'Person' && m.id === botId))
   ) {
-    return;
+    return {
+      text,
+      group,
+      bot,
+      userId,
+      isPrivateChat,
+      message: message.body,
+      type: 'Message4Others'
+    };
   }
   const regex = new RegExp(`!\\[:Person\\]\\(${bot.id}\\)`);
   text = text.replace(regex, ' ').trim();
