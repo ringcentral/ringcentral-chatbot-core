@@ -34,7 +34,7 @@ const createApp = (handle: Function, conf: BotConfig) => {
           break;
         }
         case 'PostAdded': {
-          const result = await postAdded(Bot, message);
+          const result = await postAdded(Bot, message, conf);
           if (result) {
             await handle({type: 'Message4Bot', ...result});
           }

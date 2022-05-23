@@ -13,9 +13,11 @@ export const extendApp = (
     adminRoute: '/admin',
     botRoute: '/bot',
     models: {}
-  }
+  },
+  commandLineConfigs?: any [],
 ) => {
   const conf = {
+    commandLineConfigs,
     ...config,
     models: Object.assign({}, defaultModels, config.models || {})
   }
@@ -42,12 +44,12 @@ export const extendApp = (
   
   if (process.env.RINGCENTRAL_CHATBOT_ADMIN_USERNAME && process.env.RINGCENTRAL_CHATBOT_ADMIN_PASSWORD) {
     app.use(
-      config.adminRoute,
+      conf.adminRoute,
       adminApp(mergedHandle, conf)
     );
   }
   app.use(
-    config.botRoute,
+    conf.botRoute,
     botApp(mergedHandle, conf)
   );
   for (const skill of skills) {

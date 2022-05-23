@@ -15,7 +15,8 @@ function eventHandler ({
     group, // the group object, can get chat group id from group.id
     userId, // message creator's id
     isPrivateChat, // if it is a private chat
-    message // message object, check ringcentral api document for detail
+    message, // message object, check ringcentral api document for detail
+    commandLineOptions, // only if set commandLineConfigs in botConfig, would get parse result from text, check doc/command-line-parser.md for detail
 }) {
     console.log(
         type,
@@ -71,7 +72,18 @@ const botConfig = {
     botRoute: '/bot', // optional
     models: { // optional
         Bot: 'your bot data model defination' // check src/models/Bot.ts as a example, optional
+    },
+    commandLineConfigs: { // optional
+      {
+        command: 'add'
+        options: [
+          ['-f, --float <number>', 'float argument'],
+          ['-i, --integer <number>', 'integer argument'],
+          ['-v, --verbose', 'verbosity that can be increased']
+        ]
+      }
     }
+    // if set commandLineConfigs in botConfig, would get parsed commandLineOptions object from text, check doc/command-line-parser.md for detail(use commander module)
 }
 
 let app = express()

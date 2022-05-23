@@ -44,6 +44,7 @@ export type AttachmentType = {
 };
 
 export interface BotConfig {
+  commandLineConfigs?: any [],
   adminRoute: string,
   botRoute: string,
   models?: any,

@@ -1,10 +1,10 @@
 import axios from 'axios';
+import {BotType, Message, BotConfig} from '../types';
+import commandParser from './command-line-parser'
 
-import {BotType, Message} from '../types';
-
-export const postAdded = async (Bot: any, message: Message) => {
-  let text = message.body.text;
-  if (!text) {
+export const postAdded = async (Bot: any, message: Message, conf: BotConfig) => {
+  const originalText = message.body.text;
+  if (!originalText) {
     return; // not a text message
   }
   const botId = message.ownerId;
@@ -25,7 +25,7 @@ export const postAdded = async (Bot: any, message: Message) => {
       !message.body.mentions.some(m => m.type === 'Person' && m.id === botId))
   ) {
     return {
-      text,
+      text: originalText,
       group,
       bot,
       userId,
@@ -35,7 +35,7 @@ export const postAdded = async (Bot: any, message: Message) => {
     };
   }
   const regex = new RegExp(`!\\[:Person\\]\\(${bot.id}\\)`);
-  text = text.replace(regex, ' ').trim();
+  const text = originalText.replace(regex, ' ').trim();
   if (text.startsWith('__rename__')) {
     await bot.rename(text.substring(10).trim());
     return;
@@ -55,5 +55,19 @@ export const postAdded = async (Bot: any, message: Message) => {
     await bot.updateToken(text.substring(15).trim());
     return;
   }
-  return {text, group, bot, userId, isPrivateChat, message: message.body};
+  const result: any = {
+    originalText,
+    text,
+    group,
+    bot,
+    userId,
+    isPrivateChat,
+    message:
+    message.body
+  };
+  if (conf.commandLineConfigs) {
+    const commandLineOptions = commandParser(text, conf.commandLineConfigs)
+    result.commandLineOptions = commandLineOptions
+  }
+  return result
 };
