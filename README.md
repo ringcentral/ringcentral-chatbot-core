@@ -29,7 +29,7 @@ function eventHandler ({
 
   // bot.sendMessage(groupId, body)
   if (type === 'BotJoinGroup') {
-    bot.sendAdaptiveCard(group.id, {
+    await bot.sendAdaptiveCard(group.id, {
       $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
       type: 'AdaptiveCard',
       version: '1.3',
@@ -46,8 +46,12 @@ function eventHandler ({
         }
       ]
     })
+    // or send text message
+    // await bot.sendMessage(group.id, {
+    //   text: 'welcome'
+    // })
   } else if (type === 'Message4Bot') {
-    bot.sendAdaptiveCard(group.id, {
+    await bot.sendAdaptiveCard(group.id, {
       $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
       type: 'AdaptiveCard',
       version: '1.3',
@@ -64,6 +68,10 @@ function eventHandler ({
         }
       ]
     })
+    // or send text message
+    // await bot.sendMessage(group.id, {
+    //   text: 'hi'
+    // })
   }
 }
 
@@ -73,7 +81,7 @@ const botConfig = {
     models: { // optional
         Bot: 'your bot data model defination' // check src/models/Bot.ts as a example, optional
     },
-    commandLineConfigs: { // optional
+    commandLineConfigs: [ // optional
       {
         command: 'add'
         options: [
@@ -82,7 +90,7 @@ const botConfig = {
           ['-v, --verbose', 'verbosity that can be increased']
         ]
       }
-    }
+    ]
     // if set commandLineConfigs in botConfig, would get parsed commandLineOptions object from text, check doc/command-line-parser.md for detail(use commander module)
 }
 
