@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import RingCentral from '@rc-ex/core';
 import waitFor from 'wait-for-async';
 import FormData from 'form-data';
-import {TokenInfo} from '@rc-ex/core/lib/definitions';
+import TokenInfo from '@rc-ex/core/lib/definitions/TokenInfo';
 import RestException from '@rc-ex/core/lib/RestException';
 
 import sequelize from './sequelize';
@@ -75,8 +75,8 @@ type InitOptions = {
     }
     */
     rc.token = token;
-    const r = await rc.get('/restapi/v1.0/account/~/extension/~');
-    const id = r.data.id.toString();
+    const r: any = await rc.get('/restapi/v1.0/account/~/extension/~').then(d => d.data);
+    const id = r.id.toString();
     return Bot.create({
       id,
       token: {...token, owner_id: id},
