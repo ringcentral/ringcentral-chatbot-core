@@ -104,8 +104,20 @@ app.listen(3000, () => {
 
 ## Exposed routes
 
-- `/{botConfig.adminRoute}/{routePath}`: check [src/apps/admin.ts](src/apps/admin.ts) for routes detail
-- `/{botConfig.botRoute}/{routePath}`: check [src/apps/bot.ts](src/apps/bot.ts) for routes detail
+### bot
+
+- `/{botConfig.botRoute}/oauth`: bot oauth url
+- `/{botConfig.botRoute}/webhook`: bot webhook url
+
+### for administrator
+
+- `/{botConfig.adminRoute}/setup-database`: Init data base
+- `/{botConfig.botRoute}/update-token`: fix token for single bot
+- `/{botConfig.botRoute}/maintain`: remove dead bots from database, ensure live bots have WebHooks(fix broken subscribe), destroy very old cache data
+- `/{botConfig.botRoute}/dump-database`: provide administrator with database data for troubleshooting
+- `/{botConfig.botRoute}/list-subscriptions`: provide administrator with subscriptions data for troubleshooting
+
+
 
 ## Bot instance methods
 
