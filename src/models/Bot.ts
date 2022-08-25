@@ -4,6 +4,7 @@ import waitFor from 'wait-for-async';
 import FormData from 'form-data';
 import TokenInfo from '@rc-ex/core/lib/definitions/TokenInfo';
 import RestException from '@rc-ex/core/lib/RestException';
+import axios from 'axios';
 
 import sequelize from './sequelize';
 
@@ -60,10 +61,27 @@ type InitOptions = {
     */
     token.creator_extension_id = initOptions.creator_extension_id;
     token.creator_account_id = initOptions.creator_account_id;
-    return Bot.create({
-      id: token.owner_id,
-      token,
-    });
+
+    const accountInfo = await rc.restapi('v1.0').account(initOptions.creator_account_id).get();
+    const country = await rc.restapi('v1.0').dictionary().country(accountInfo.serviceInfo?.contractedCountry?.id);
+    // TODO: needs some API or mapping to get isEU by country_code
+    const isEU = false;
+    if (process.env.ENABLE_MULTI_REGION && isEU) {
+      const euInitOptions = {
+        code: '',
+        token
+      } as InitOptions
+      if (process.env.EU_SERVER_AUTH_URL) {
+        // re-direct and sent to EU server
+        await axios.post(process.env.EU_SERVER_AUTH_URL, euInitOptions);
+      }
+    }
+    else {
+      return Bot.create({
+        id: token.owner_id,
+        token,
+      });
+    }
   } else if (token) {
     // private bot
     /*
@@ -79,7 +97,7 @@ type InitOptions = {
     const id = r.id.toString();
     return Bot.create({
       id,
-      token: {...token, owner_id: id},
+      token: { ...token, owner_id: id },
     });
   }
   return undefined;
@@ -166,7 +184,7 @@ Bot.prototype.setupWebHook = async function () {
       }
       const errorCode = e.response.data.errorCode;
       if (errorCode === 'SUB-406') {
-        await waitFor({interval: 10000});
+        await waitFor({ interval: 10000 });
         continue;
       }
       throw e;
@@ -231,7 +249,7 @@ Bot.prototype.remove = async function () {
 
 Bot.prototype.rename = async function (newName: string) {
   await this.rc.put('/restapi/v1.0/account/~/extension/~', {
-    contact: {firstName: newName},
+    contact: { firstName: newName },
   });
 };
 
@@ -257,7 +275,7 @@ Bot.prototype.getUser = async function (userId: string) {
     );
     rc = r.data;
   }
-  return {glip, rc};
+  return { glip, rc };
 };
 
 Bot.prototype.getSubscriptions = async function () {

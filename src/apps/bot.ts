@@ -15,8 +15,11 @@ const createApp = (handle: Function, conf: BotConfig) => {
       creator_extension_id: req.query.creator_extension_id,
       creator_account_id: req.query.creator_account_id,
     })) as BotType;
-    await bot.setupWebHook(); // this might take a while, depends on when the bot user is ready
-    await handle({type: 'BotAdded', bot});
+    if(bot)
+    {
+      await bot.setupWebHook(); // this might take a while, depends on when the bot user is ready
+      await handle({type: 'BotAdded', bot});
+    }
     res.send('');
   });
 
