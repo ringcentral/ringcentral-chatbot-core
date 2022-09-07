@@ -17,7 +17,8 @@ const createApp = (handle: Function, conf: BotConfig) => {
     })) as BotType;
     await bot.setupWebHook(); // this might take a while, depends on when the bot user is ready
     await handle({type: 'BotAdded', bot});
-    res.send('');
+    res.status(200);
+    res.send('ok'); // return string to fix issue for serverless-offline
   });
 
   app.post('/webhook', async (req, res) => {
