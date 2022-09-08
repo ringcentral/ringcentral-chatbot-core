@@ -66,7 +66,7 @@ const createApp = (handle: Function, conf: BotConfig) => {
       await handle({type: body.eventType, message});
     }
     res.header('Validation-Token', req.header('Validation-Token'));
-    res.send('');
+    res.json({ result: 'ok' });
   });
 
   return app;
